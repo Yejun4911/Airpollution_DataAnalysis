@@ -1,0 +1,81 @@
+setwd("~/downloads")
+getwd()
+install.packages("dplyr")
+install.packages("ggplot2")
+
+library(ggplot2)
+a <- read.csv("2019.csv",fileEncoding = "euc-kr")
+
+b <-c(unique(a[2]))
+b
+jg <- subset(a,subset=(측정소명=="중구"))
+jr <- subset(a,subset=(측정소명=="종로구"))
+ys <- subset(a,subset=(측정소명=="용산구"))
+ep <- subset(a,subset=(측정소명=="은평구"))
+sdm <- subset(a,subset=(측정소명=="서대문구"))
+mp <- subset(a,subset=(측정소명=="마포구"))
+gj <- subset(a,subset=(측정소명=="광진구"))
+sd <- subset(a,subset=(측정소명=="성동구"))
+jn <- subset(a,subset=(측정소명=="중랑구"))
+ddm <- subset(a,subset=(측정소명=="동대문구"))
+sb <- subset(a,subset=(측정소명=="성북구"))
+db <- subset(a,subset=(측정소명=="도봉구"))
+gb <- subset(a,subset=(측정소명=="강북구"))
+no <- subset(a,subset=(측정소명=="노원구"))
+ks <- subset(a,subset=(측정소명=="강서구"))
+kr <- subset(a,subset=(측정소명=="구로구"))
+ydp <- subset(a,subset=(측정소명=="영등포구"))
+dj <- subset(a,subset=(측정소명=="동작구"))
+ka <- subset(a,subset=(측정소명=="관악구"))
+kc <- subset(a,subset=(측정소명=="금천구"))
+yc <- subset(a,subset=(측정소명=="양천구"))
+kn <- subset(a,subset=(측정소명=="강남구"))
+sc <- subset(a,subset=(측정소명=="서초구"))
+sp <- subset(a,subset=(측정소명=="송파구"))
+kd <- subset(a,subset=(측정소명=="강동구"))
+
+
+##지역별 년 평균 
+평균 <- c(mean(jg$"미세먼지"),mean(ys$"미세먼지"),mean(jr$"미세먼지"),mean(ep$"미세먼지"),mean(sdm$"미세먼지"),mean(mp$"미세먼지"),mean(gj$"미세먼지"),mean(sd$"미세먼지")
+        ,mean(jn$"미세먼지"),mean(ddm$"미세먼지"),mean(sb$"미세먼지"),mean(db$"미세먼지"),mean(gb$"미세먼지"),mean(no$"미세먼지"),mean(ks$"미세먼지"),mean(kr$"미세먼지")
+        ,mean(ydp$"미세먼지"),mean(dj$"미세먼지"),mean(ka$"미세먼지"),mean(kc$"미세먼지"),mean(yc$"미세먼지"),mean(kn$"미세먼지"),mean(sc$"미세먼지"),mean(sp$"미세먼지"),mean(kd$"미세먼지"))
+평균
+ydf <- data.frame(b,평균)
+ydf
+library(googleVis)
+
+yearavggp<-gvisColumnChart(ydf, options = list(title="2019년 지역별 미세먼지 평균 수치",height=400,weight=500))
+plot(yearavggp)
+
+##지역별 매우나쁨
+jgbad <- subset(jg,subset=(미세먼지>=76))
+
+jrbad <- subset(jr,subset=(미세먼지>=76))
+ysbad <- subset(ys,subset=(미세먼지>=76))
+epbad <- subset(ep,subset=(미세먼지>=76))
+sdmbad <- subset(sdm,subset=(미세먼지>=76))
+mpbad <- subset(mp,subset=(미세먼지>=76))
+gjbad <- subset(gj,subset=(미세먼지>=76))
+sdbad <- subset(sd,subset=(미세먼지>=76))
+jnbad <- subset(jn,subset=(미세먼지>=76))
+ddmbad <- subset(ddm,subset=(미세먼지>=76))
+sbbad <- subset(sb,subset=(미세먼지>=76))
+dbbad <- subset(db,subset=(미세먼지>=76))
+gbbad <- subset(gb,subset=(미세먼지>=76))
+nobad <- subset(no,subset=(미세먼지>=76))
+ksbad <- subset(ks,subset=(미세먼지>=76))
+krbad <- subset(kr,subset=(미세먼지>=76))
+ydpbad <- subset(ydp,subset=(미세먼지>=76))
+djbad <- subset(dj,subset=(미세먼지>=76))
+kabad <- subset(ka,subset=(미세먼지>=76))
+kcbad <- subset(kc,subset=(미세먼지>=76))
+ycbad <- subset(yc,subset=(미세먼지>=76))
+knbad <- subset(kn,subset=(미세먼지>=76))
+scbad <- subset(sc,subset=(미세먼지>=76))
+spbad <- subset(sp,subset=(미세먼지>=76))
+kdbad <- subset(kd,subset=(미세먼지>=76))
+##서울시에서 가장 미세먼지 매우높은
+bestmax <- max(a[3])
+bestmax
+bestbad <- subset(a,subset=(미세먼지==bestmax))
+bestbad
